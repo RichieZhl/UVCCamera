@@ -1,0 +1,100 @@
+plugins {
+    id 'com.android.library'
+//    id 'maven-publish'
+    id 'com.github.dcendents.android-maven'
+}
+
+group = 'com.github.RichieZhl'
+//version = '0.1.0'
+
+android {
+//    ndkVersion '21.1.6352462'
+    compileSdkVersion 31
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+//    sourceSets {
+//        main {
+//            jniLibs.srcDir 'src/main/libs'
+//            jni.srcDirs = []
+//        }
+//    }
+
+//    afterEvaluate {
+//        publishing {
+//            publications {
+//                // Creates a Maven publication called "release".
+//                release(MavenPublication) {
+//                    // Applies the component for the release build variant.
+//                    from components.release
+//                }
+//            }
+//        }
+//    }
+
+    externalNativeBuild {
+        ndkBuild {
+            path file('src/main/cpp/Android.mk')
+        }
+    }
+}
+
+//import org.apache.tools.ant.taskdefs.condition.Os
+//
+//tasks.withType(JavaCompile) {
+//    compileTask -> compileTask.dependsOn ndkBuild
+//}
+//
+//String getNdkBuildPath() {
+//    Properties properties = new Properties()
+//    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+//    def ndkBuildingDir = properties.getProperty("ndk.dir")
+//    def ndkBuildPath = ndkBuildingDir
+//    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+//        ndkBuildPath = ndkBuildingDir + '/ndk-build.cmd'
+//    } else {
+//        ndkBuildPath = ndkBuildingDir + '/ndk-build'
+//    }
+//    return ndkBuildPath
+//}
+//
+//task ndkBuild(type: Exec, description: 'Compile JNI source via NDK') {
+//    println('executing ndkBuild')
+//    def ndkBuildPath = getNdkBuildPath();
+//    commandLine ndkBuildPath, '-j8', '-C', file('src/main').absolutePath
+//}
+//
+//task ndkClean(type: Exec, description: 'clean JNI libraries') {
+//    println('executing ndkBuild clean')
+//    def ndkBuildPath = getNdkBuildPath();
+//    commandLine ndkBuildPath, 'clean', '-C', file('src/main').absolutePath
+//}
+//
+//clean.dependsOn 'ndkClean'
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation("com.serenegiant:common:0.0.3") {
+        exclude module: 'support-v4'
+    }
+}

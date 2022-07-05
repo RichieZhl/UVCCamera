@@ -1,0 +1,3 @@
+rootProject.name = "UVCCamera"
+include ':app'
+include ':uvccamera'

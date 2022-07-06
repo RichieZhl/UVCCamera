@@ -169,13 +169,16 @@ public class CameraActivity extends AppCompatActivity implements TextureView.Sur
                     if (Looper.myLooper() == null) {
                         Looper.prepare();//这一步也很重要否则会引发内部Handler 异常
                     }
-                    camera.open(ctrlBlock);
 
-                    // Set Preview Mode
                     try {
+                        // open camera
+                        camera.open(ctrlBlock);
+                        // Set Preview Mode
                         camera.setPreviewSize(UVCCamera.DEFAULT_PREVIEW_WIDTH,
                                 UVCCamera.DEFAULT_PREVIEW_HEIGHT,
                                 UVCCamera.FRAME_FORMAT_MJPEG, 0.5f);
+                    } catch (UnsupportedOperationException e1) {
+                        return;
                     } catch (IllegalArgumentException e1) {
                         e1.printStackTrace();
                         try {

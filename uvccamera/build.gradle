@@ -93,9 +93,5 @@ android {
 //clean.dependsOn 'ndkClean'
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.aar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
-//    implementation("com.serenegiant:common:0.0.3") {
-//        exclude module: 'support-v4'
-//    }
 }
